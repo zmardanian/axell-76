@@ -6,6 +6,11 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      full:
+        description: "Full analysis (the DSP suite always runs in full; this keeps every report)"
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -46,12 +51,14 @@ jobs:
           cmake --build build --config Release --target Axell76_VST3 A76DspTests A76PluginTests a76_render -- -m
           echo "BIN=build/Release" >> "$GITHUB_ENV"; echo "EXE=.exe" >> "$GITHUB_ENV"; echo "RUN=" >> "$GITHUB_ENV"
       - name: DSP suite
-        run: ./$BIN/A76DspTests$EXE
+        run: |
+          mkdir -p reports
+          ./$BIN/A76DspTests$EXE 2>&1 | tee reports/dsp-$RUNNER_OS.txt
       - name: Plugin suite
         run: |
           T=$(find build -type f -name "A76PluginTests$EXE" -path "*Release*" | head -1); echo "found: $T"
           [ -n "$T" ] || { find build -maxdepth 4 -name "*PluginTests*"; exit 1; }
-          $RUN "$T"
+          $RUN "$T" 2>&1 | tee reports/plugin-$RUNNER_OS.txt
       - name: Windows crash details (only when a suite failed)
         if: failure() && runner.os == 'Windows'
         shell: pwsh
@@ -69,7 +76,7 @@ jobs:
           echo "$(cat $S)  pluginval.zip" | sha256sum -c
           unzip -o pluginval.zip
           $RUN ./pluginval$EXE --strictness-level 10 --validate-in-process \
-            --validate "build/Axell76_artefacts/Release/VST3/Axell 76.vst3"
+            --validate "build/Axell76_artefacts/Release/VST3/Axell 76.vst3" 2>&1 | tee reports/pluginval-$RUNNER_OS.txt
       - name: Render the match signal through the shipping engine
         run: |
           mkdir -p match
@@ -77,6 +84,12 @@ jobs:
           ./$BIN/a76_render$EXE match/in.f32 match/default.f32 48000 2
           ./$BIN/a76_render$EXE match/in.f32 match/hard.f32 48000 2 input=30 ratio=4 attack=7 release=7
           ./$BIN/a76_render$EXE match/in.f32 match/parallel.f32 48000 2 input=24 ratio=1 mix=50 os=0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: reports-${{ runner.os }}
+          path: reports/
+          retention-days: 30
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: match-${{ runner.os }}
