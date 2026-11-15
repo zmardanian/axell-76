@@ -6,7 +6,8 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-3.2.0-9c7434?style=flat-square" alt="version 3.2.0">
+  <a href="https://github.com/zmardanian/axell-76/releases/latest"><img src="https://img.shields.io/github/v/release/zmardanian/axell-76?style=flat-square&label=release&color=9c7434" alt="latest release"></a>
+  <a href="https://github.com/zmardanian/axell-76/releases"><img src="https://img.shields.io/github/downloads/zmardanian/axell-76/total?style=flat-square&color=2a1f17" alt="downloads"></a>
   <img src="https://img.shields.io/badge/Linux%20%2B%20Windows-x86__64-2a1f17?style=flat-square" alt="Linux + Windows x86_64">
   <img src="https://img.shields.io/badge/VST3%20%C2%B7%20LV2%20%C2%B7%20Standalone-2a1f17?style=flat-square" alt="VST3, LV2, Standalone">
   <img src="https://img.shields.io/badge/licence-AGPL--3.0-6b5a4a?style=flat-square" alt="AGPL-3.0">
@@ -21,6 +22,22 @@
   Walnut, brushed aluminium and an amber-lit meter on the outside. Underneath, a compressor that follows a genuine<br>
   1176LN more than twice as closely as Universal Audio's own UADx 1176 - with a fraction of its aliasing.
 </p>
+
+<!-- download -->
+<p align="center">
+  <a href="https://github.com/zmardanian/axell-76/releases/latest"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/type/dl-windows-dark.png">
+  <img alt="Download for Windows" src="docs/img/type/dl-windows-light.png" height="58">
+</picture></a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/zmardanian/axell-76/releases/latest"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/type/dl-linux-dark.png">
+  <img alt="Download for Linux" src="docs/img/type/dl-linux-light.png" height="58">
+</picture></a>
+</p>
+
+<p align="center"><sub>Free and open source (AGPL-3.0)  ·  Windows 10 / 11 and Linux  ·  any VST3 host - FL Studio, Ableton Live, Cubase, Studio One, Bitwig, REAPER</sub></p>
+<!-- /download -->
 
 <br>
 
@@ -201,3 +218,45 @@ redistributed). Framework: JUCE. Typefaces: Great Vibes, Cormorant Garamond and 
 affiliated with or endorsed by Universal Audio; the names describe what was measured and compared.*
 
 Axell 76 is licensed under the GNU AGPLv3.
+
+<!-- suite -->
+**Part of the Axell Signature suite** - nine plugins and their home, built as one family. The [Axell Signature Dojo](https://github.com/zmardanian/axell-signature-dojo) installs and updates them all - on Windows from a single installer.
+
+<p align="center">
+<table>
+<tr><td align="center"><a href="https://github.com/zmardanian/axell-penta-eq"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/penta-eq-dark.png">
+  <img alt="Penta EQ" src="docs/img/suite/penta-eq-light.png" width="120">
+</picture></a><br><sub>analog-matched EQ</sub></td><td align="center"><a href="https://github.com/zmardanian/axell-duo-compressor"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/duo-compressor-dark.png">
+  <img alt="Duo Compressor" src="docs/img/suite/duo-compressor-light.png" width="120">
+</picture></a><br><sub>FET + opto + limiter</sub></td><td align="center"><a href="https://github.com/zmardanian/axell-gate"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/gate-dark.png">
+  <img alt="Gate" src="docs/img/suite/gate-light.png" width="120">
+</picture></a><br><sub>voice-aware gate</sub></td><td align="center"><a href="https://github.com/zmardanian/axell-dereverb"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/dereverb-dark.png">
+  <img alt="De-Reverb" src="docs/img/suite/dereverb-light.png" width="120">
+</picture></a><br><sub>small-room de-reverb</sub></td><td align="center"><a href="https://github.com/zmardanian/axell-velvet"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/velvet-dark.png">
+  <img alt="Velvet" src="docs/img/suite/velvet-light.png" width="120">
+</picture></a><br><sub>neural de-esser + warmth</sub></td></tr>
+<tr><td align="center"><a href="https://github.com/zmardanian/axell-master"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/master-dark.png">
+  <img alt="Master" src="docs/img/suite/master-light.png" width="120">
+</picture></a><br><sub>mastering limiter</sub></td><td align="center"><a href="https://github.com/zmardanian/axell-space"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/space-dark.png">
+  <img alt="Space" src="docs/img/suite/space-light.png" width="120">
+</picture></a><br><sub>vocal reverb + delay</sub></td><td align="center"><a href="https://github.com/zmardanian/axell-forbidden-seal"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/forbidden-seal-dark.png">
+  <img alt="Forbidden Seal" src="docs/img/suite/forbidden-seal-light.png" width="120">
+</picture></a><br><sub>saturation</sub></td><td align="center"><a href="https://github.com/zmardanian/axell-76"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/76-dark.png">
+  <img alt="76" src="docs/img/suite/76-light.png" width="120">
+</picture></a><br><sub>1176 FET compressor</sub></td><td align="center"><a href="https://github.com/zmardanian/axell-signature-dojo"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/suite/signature-dojo-dark.png">
+  <img alt="Signature Dojo" src="docs/img/suite/signature-dojo-light.png" width="120">
+</picture></a><br><sub>the suite's home</sub></td></tr>
+</table>
+</p>
+<!-- /suite -->
+
