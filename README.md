@@ -7,7 +7,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-3.2.0-9c7434?style=flat-square" alt="version 3.2.0">
-  <img src="https://img.shields.io/badge/Linux-x86__64-2a1f17?style=flat-square" alt="Linux x86_64">
+  <img src="https://img.shields.io/badge/Linux%20%2B%20Windows-x86__64-2a1f17?style=flat-square" alt="Linux + Windows x86_64">
   <img src="https://img.shields.io/badge/VST3%20%C2%B7%20LV2%20%C2%B7%20Standalone-2a1f17?style=flat-square" alt="VST3, LV2, Standalone">
   <img src="https://img.shields.io/badge/licence-AGPL--3.0-6b5a4a?style=flat-square" alt="AGPL-3.0">
 </p>
@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <b>A 1176-style FET limiter for Linux, built from measurements of the real hardware.</b><br>
+  <b>A 1176-style FET limiter for Linux and Windows, built from measurements of the real hardware.</b><br>
   Walnut, brushed aluminium and an amber-lit meter on the outside. Underneath, a compressor that follows a genuine<br>
   1176LN more than twice as closely as Universal Audio's own UADx 1176 - with a fraction of its aliasing.
 </p>
