@@ -20,7 +20,7 @@
 <p align="center">
   <b>A 1176-style FET limiter for Linux and Windows, built from measurements of the real hardware.</b><br>
   Walnut, brushed aluminium and an amber-lit meter on the outside. Underneath, a compressor that follows a genuine<br>
-  1176LN more than twice as closely as Universal Audio's own UADx 1176 - with a fraction of its aliasing.
+  1176LN as closely as Universal Audio's own UADx 1176 - with a fraction of its aliasing.
 </p>
 
 <!-- download -->
@@ -51,13 +51,16 @@ plugin.
 
 | | **Axell 76 3.2** | UADx 1176 |
 |---|:---:|:---:|
-| Distance from a **real 1176LN** - 593 notes it never trained on (mean · median · p90) | **0.44 · 0.37 · 0.80 dB** | 0.91 · 0.88 · 1.12 dB |
-| Waveform match with the real 1176LN (median error, lower is better) | **−25.5 dB** | −15.9 dB |
+| Distance from a **real 1176LN** - notes it never trained on (mean · median · p90) | 0.44 · 0.37 · 0.80 dB | 0.44 · 0.37 · 0.79 dB with ATTACK at 4 &nbsp;·&nbsp; 0.91 · 0.88 · 1.12 dB at the panel setting |
+| Waveform match with the real 1176LN (median error, lower is better) | −25.5 dB | −15.9 dB at the panel setting (not measured at ATTACK 4) |
 | Aliasing on hard, fast settings (5 - 17 kHz tones, default quality) | **−68 to −90 dB** | −40 to −56 dB |
 | Follows the UADx on music it never heard (100 songs, median clip) | 0.65 dB | - |
 | CPU, one core, 48 kHz, 4x oversampling, always compressing | ~2 % | 2.3 % (Wine bridge) |
 
-<p align="center"><img src="docs/img/hardware.svg" alt="Distance from a real 1176LN" width="88%"></p>
+**Read the first row fairly.** The hardware was recorded at ALL, attack 800 µs, release 1100 ms - position 1 on both knobs. At those
+positions Axell 76 is 0.44 dB from it and the UADx 0.91 dB; with its ATTACK at 4 the UADx reaches 0.44 dB as well (149 of the
+held-out notes, each plugin at its best input level). Real units differ in their time constants, and since 3.2 Axell 76 has
+learned from this unit - so the honest reading is a tie: both follow a real 1176LN equally closely.
 
 **The reference.** The hardware recordings are public - Martinez Ramirez, Benetos & Reiss, *Deep Learning for
 Black-Box Modeling of Audio Effects*, Appl. Sci. 10(2) 638, 2020 ([Zenodo 3562442](https://zenodo.org/records/3562442),
