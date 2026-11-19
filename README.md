@@ -11,6 +11,7 @@
   <img src="https://img.shields.io/badge/Linux%20%2B%20Windows-x86__64-2a1f17?style=flat-square" alt="Linux + Windows x86_64">
   <img src="https://img.shields.io/badge/VST3%20%C2%B7%20LV2%20%C2%B7%20Standalone-2a1f17?style=flat-square" alt="VST3, LV2, Standalone">
   <img src="https://img.shields.io/badge/licence-AGPL--3.0-6b5a4a?style=flat-square" alt="AGPL-3.0">
+  <a href="https://ko-fi.com/axellyobag"><img src="https://img.shields.io/badge/Ko--fi-support%20the%20Dojo-c9a25e?style=flat-square&logo=kofi&logoColor=white" alt="Support on Ko-fi"></a>
 </p>
 
 <p align="center">
@@ -37,6 +38,8 @@
 </p>
 
 <p align="center"><sub>Free and open source (AGPL-3.0)  ·  Windows 10 / 11 and Linux  ·  any VST3 host - FL Studio, Ableton Live, Cubase, Studio One, Bitwig, REAPER</sub></p>
+
+<p align="center"><a href="https://ko-fi.com/axellyobag"><img src="https://img.shields.io/badge/Support%20on%20Ko--fi-free%20forever%2C%20kept%20alive%20by%20you-c9a25e?style=for-the-badge&logo=kofi&logoColor=white&labelColor=1a1712" alt="Support on Ko-fi - free forever, kept alive by you" height="34"></a></p>
 <!-- /download -->
 
 <br>
@@ -213,6 +216,9 @@ scripts/build-portable.sh && scripts/make-release.sh     # the portable Linux re
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/type/h-credits-dark.png">
   <img alt="08 Credits - Credits & licence." src="docs/img/type/h-credits-light.png" height="68">
 </picture>
+
+**Free forever, kept alive by you.** Axell 76 costs nothing and never will - no subscriptions, no licence keys. If it has earned a place in your mixes, you can [support the Dojo on Ko-fi](https://ko-fi.com/axellyobag) - one-time or monthly, from €3.
+
 
 Hardware data: Martinez Ramirez, Benetos & Reiss (2020), CC BY 4.0. Music stems: MUSDB18 (research use, not
 redistributed). Framework: JUCE. Typefaces: Great Vibes, Cormorant Garamond and Jost (SIL Open Font License).
