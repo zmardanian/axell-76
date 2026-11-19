@@ -224,7 +224,7 @@ Hardware data: Martinez Ramirez, Benetos & Reiss (2020), CC BY 4.0. Music stems:
 redistributed). Framework: JUCE. Typefaces: Great Vibes, Cormorant Garamond and Jost (SIL Open Font License).
 
 *1176, 1176LN, UADx and Universal Audio are trademarks of Universal Audio, Inc. Axell 76 is an independent work, not
-affiliated with or endorsed by Universal Audio; the names describe what was measured and compared.*
+affiliated with or endorsed by Universal Audio; the names describe what was measured and compared. VST is a registered trademark of Steinberg Media Technologies GmbH.*
 
 Axell 76 is licensed under the GNU AGPLv3.
 
