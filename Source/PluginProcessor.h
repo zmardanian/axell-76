@@ -32,11 +32,13 @@ public:
 
     static juce::AudioProcessorValueTreeState::ParameterLayout createLayout();
     juce::AudioProcessorValueTreeState apvts;
-    std::atomic<float> grMeter { 0.0f }, inPeak { -100.0f }, outPeak { -100.0f }, outMs { 0.0f };
+    std::atomic<float> grMeter { 0.0f }, inPeak { -100.0f }, outPeak { -100.0f }, outMs { 0.0f };   // outMs: the VU reading, as a mean square
     std::atomic<bool> scConnected { false };
     std::atomic<int> currentProgram { 0 };
     std::atomic<int> modelGen { 4 };       // 4 = 3.2 model; 3 = a 3.0/3.1 session, 2 = a 2.0 session: each keeps its sound, bit-exactly
     int modelApplied = 0;
+    // 3.2.2: the VU movement (+4 / +8) - see processBlock
+    float vuY = 0.0f, vuV = 0.0f, vuDt = 1.0f / 48000.0f;
 
 private:
     axell76::Params readParams() const;

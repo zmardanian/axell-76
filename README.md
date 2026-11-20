@@ -110,7 +110,7 @@ checked on material it was not tuned on. [What every preset measurably does &rar
 | **The 1176 workflow** | INPUT drives into a fixed threshold, OUTPUT sets the level. ATTACK and RELEASE 1 - 7 (7 fastest), with the hardware's program-dependent release. RATIO 4 · 8 · 12 · 20 · ALL - each with its own threshold and slope, and ALL's famous over-compression. |
 | **FET character** | Even harmonics that grow with gain reduction, odd-harmonic bite, the grit of a fast release on bass, a delicate low thump on every clamp, the coupling low-cut, the FET's soft limit. |
 | **Modern control** | MIX for parallel compression (delay-matched), latency-compensated IN / OUT, QUALITY 2x · 4x · 8x oversampling, side-chain high-pass, external side-chain input. |
-| **The meter** | Gain reduction, or a classic VU of the output at +4 or +8 - click the meter to switch. |
+| **The meter** | Gain reduction, or a classic VU of the output at +4 or +8 (true VU ballistics: 300 ms, as a hardware meter) - click the meter to switch. |
 | **The cabinet** | Four walnut boards with mitred corners and a hairline seam, brushed aluminium, an aged amber-lit VU, in **SILVER** or **BLACK**; textures render at your screen's real pixel density. |
 | **Safe sessions** | Projects keep the sound they were made with: 2.0, 3.0/3.1 and 3.2 sessions each render bit-for-bit as on their own release. |
 | **Robust** | Any block size, mono or stereo, 44.1 - 192 kHz; NaN- and denormal-safe; click-free automation; state round-trips exactly. |
@@ -136,16 +136,16 @@ checked on material it was not tuned on. [What every preset measurably does &rar
 
 **Windows 10 / 11 (64-bit):** install the whole Axell Signature Suite with
 [`AxellSignatureSuite-…-windows-x64-setup.exe`](https://github.com/zmardanian/axell-signature-dojo/releases/latest)
-(Axell 76 is one of its components), or download **`Axell76-3.2.1-windows-x64.tar.gz`** from [Releases](../../releases)
+(Axell 76 is one of its components), or download **`Axell76-3.2.2-windows-x64.tar.gz`** from [Releases](../../releases)
 and copy the `Axell 76.vst3` folder inside it into `C:\Program Files\Common Files\VST3`. Every VST3 host loads it
 (REAPER, Ableton Live, FL Studio, Cubase, Studio One, Bitwig...). The Windows build is made and tested by GitHub
 Actions and renders the same as the Linux build (largest difference -138.5 dBFS); it is not code-signed yet.
 
-**Linux:** download **`Axell76-3.2.1-linux-x86_64.tar.gz`** from [Releases](../../releases), then:
+**Linux:** download **`Axell76-3.2.2-linux-x86_64.tar.gz`** from [Releases](../../releases), then:
 
 ```bash
-tar xzf Axell76-3.2.1-linux-x86_64.tar.gz
-cd Axell76-3.2.1-linux-x86_64
+tar xzf Axell76-3.2.2-linux-x86_64.tar.gz
+cd Axell76-3.2.2-linux-x86_64
 ./install.sh            # VST3 -> ~/.vst3, LV2 -> ~/.lv2, the standalone app into your menu - no root needed
 ```
 
@@ -185,6 +185,7 @@ was tried and rejected, is in [docs/REPORT.md](docs/REPORT.md).
 
 | Version | |
 |---|---|
+| **3.2.2** | The VU (+4 / +8) moves like a real VU meter: it integrates over 300 ms (IEC 60268-17, 1.3 % overshoot) instead of following each 10 ms block, so on a beat it pulses with the music instead of slamming from the left stop to 0 on every hit. Sound byte-identical to 3.2.1 (186 renders) |
 | **3.2.1** | Your DAW's preset menu shows the right preset after a project is reopened (the chosen preset is saved with the project and read back without re-applying it); every control named for screen readers. Sound byte-identical to 3.2.0 (186 renders) |
 | **3.2** | Fitted to a real 1176LN as well as the UADx: 0.466 &rarr; 0.435 dB from the hardware on unseen notes, waveform match 0.66 dB better, the UADx's harmonics matched more closely; one trade-off - 0.015 dB less UADx-like on music. Studio-ready README. Earlier sessions keep their sound |
 | **3.1** | 52 presets (40 new, 10 tuned on the artist's voice, vocal-keyed pocket ducking), grouped menu; parameter values shown correctly in every host |

@@ -1,6 +1,7 @@
 // Axell 76 plugin tests (JUCE): state round trip (parameters + skin), identical render after reload, bypass null.
 #include "../Source/PluginProcessor.h"
 #include <cstdio>
+#include <functional>
 static int fails = 0, passes = 0;
 #define CHECK(c, ...) do { if (c) ++passes; else { ++fails; std::printf ("FAIL %s:%d  ", __FILE__, __LINE__); std::printf (__VA_ARGS__); std::printf ("\n"); } } while (0)
 static void set (A76Processor& p, const char* id, float v) { auto* q = p.apvts.getParameter (id); q->setValueNotifyingHost (q->convertTo0to1 (v)); }
@@ -132,6 +133,32 @@ int main (int argc, char** argv)
       A76Processor v3; v3.setStateInformation (m3.getData(), (int) m3.getSize()); CHECK (v3.modelGen.load() == 3, "a 3.x session did not keep the 3.1 model");
       juce::MemoryBlock again; v3.getStateInformation (again); A76Processor v3b; v3b.setStateInformation (again.getData(), (int) again.getSize());
       CHECK (v3b.modelGen.load() == 3, "a 3.x session lost its model when saved again"); }
+    // 3.2.2: the VU (+4 / +8) is a real VU movement - a sine reads its RMS, a step takes 300 ms to 99 %, and a drum-like
+    // pulse train (50 ms hits, 0.5 s apart) moves it a few dB, not from the left stop to 0 on every hit
+    { A76Processor vp; set (vp, "bypass", 1.0f);   // bypassed: the output is the input, the meter reads the signal itself
+      vp.setPlayConfigDetails (2, 2, 48000.0, 512); vp.prepareToPlay (48000.0, 512);
+      juce::AudioBuffer<float> b (2, 512); juce::MidiBuffer m;
+      auto vuDb = [&] { return 10.0f * std::log10 (vp.outMs.load() + 1.0e-12f); };
+      auto run = [&] (int blocks, std::function<float (int)> sig, std::vector<float>* trace)
+      { static int s = 0; for (int k = 0; k < blocks; ++k) { for (int i = 0; i < 512; ++i, ++s) { const float v = sig (s); b.setSample (0, i, v); b.setSample (1, i, v); }
+          vp.processBlock (b, m); if (trace) trace->push_back (vp.outMs.load()); } };
+      const float a = 0.1778f;   // -15 dBFS peak = -18 dBFS RMS: 0 VU at +4
+      auto sine = [a] (int s) { return a * std::sin (2.0f * 3.14159265f * 1000.0f * (float) s / 48000.0f); };
+      run (94, [] (int) { return 0.0f; }, nullptr);                       // 1 s of silence
+      std::vector<float> tr; run (188, sine, &tr);                        // then 2 s of the sine
+      const float fin = 10.0f * std::log10 (tr.back());
+      CHECK (std::abs (fin + 18.0f) < 0.2f, "VU calibration: a -18 dBFS RMS sine reads %.2f dB", fin);
+      int k99 = 0; while (k99 < (int) tr.size() && std::sqrt (tr[(size_t) k99] / tr.back()) < 0.99f) ++k99;
+      const float t99 = (float) (k99 + 1) * 512.0f / 48.0f - 10.0f;       // ms (the bypass delay of the latency aside)
+      CHECK (t99 > 260.0f && t99 < 345.0f, "VU rise time to 99 %%: %.0f ms (300 +- 10 %%; plus up to one latency)", t99);
+      // music-like: a sustained bed 10 dB under 60 ms hits, twice a second; the old meter was the RMS of each block
+      auto beat = [a] (int s) { const float x = std::sin (0.13f * (float) s); return (s % 24000) < 2880 ? a * x : 0.316f * a * x; };
+      run (188, beat, nullptr);
+      float hi = -200.0f, lo = 200.0f, bhi = -200.0f, blo = 200.0f;
+      for (int k = 0; k < 188; ++k)
+      { run (1, beat, nullptr); hi = std::max (hi, vuDb()); lo = std::min (lo, vuDb());
+        const float br = 20.0f * std::log10 (b.getRMSLevel (0, 0, 512) + 1.0e-6f); bhi = std::max (bhi, br); blo = std::min (blo, br); }
+      CHECK (hi - lo < 0.6f * (bhi - blo) && hi - lo > 1.0f, "VU swing on a beat %.1f dB vs the block RMS %.1f dB (a VU integrates: well under it)", hi - lo, bhi - blo); }
     std::printf ("Axell 76 plugin: %d passed, %d failed\n", passes, fails);
     return fails ? 1 : 0;
 }

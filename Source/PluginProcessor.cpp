@@ -89,6 +89,8 @@ void A76Processor::prepareToPlay (double sampleRate, int samplesPerBlock)
     modelApplied = modelGen.load(); engine.setModelGeneration (modelApplied);
     engine.prepare (sampleRate, samplesPerBlock, getTotalNumOutputChannels());
     setLatencySamples (engine.latencySamples());
+    vuY = vuV = 0.0f;
+    vuDt = (float) (1.0 / sampleRate);
 }
 
 void A76Processor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
@@ -126,7 +128,26 @@ void A76Processor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuf
     float op = 0.0f;
     for (int c = 0; c < nc; ++c) op = std::max (op, buffer.getMagnitude (c, 0, n));
     grMeter.store (engine.gainReductionDb());
-    outMs.store (engine.outputMeanSquare());
+    // 3.2.2 the VU (+4 / +8) as a real VU movement (IEC 60268-17): the full-wave rectified output (louder channel) through
+    // a second-order movement - damping 0.81, 2.14 Hz: 99 % of a step in 300 ms, 1.3 % overshoot - read as a sine's RMS
+    // (x 1.1107). Before, the needle chased the RMS of the last block alone (~10 ms): on drums it slammed between -20 and
+    // 0 on every hit; a VU integrates, so the gaps between hits barely move it
+    {
+        constexpr float w = 13.4222f, z = 0.81f;
+        const float* l = buffer.getReadPointer (0);
+        const float* r = nc > 1 ? buffer.getReadPointer (1) : l;
+        float y = vuY, v = vuV;
+        for (int i = 0; i < n; ++i)
+        {
+            const float x = std::max (std::abs (l[i]), std::abs (r[i]));
+            v += (w * w * (x - y) - 2.0f * z * w * v) * vuDt;
+            y += v * vuDt;
+        }
+        vuY = std::isfinite (y) ? y : 0.0f;
+        vuV = std::isfinite (v) ? v : 0.0f;
+        const float rms = 1.1107f * std::max (0.0f, vuY);
+        outMs.store (rms * rms);
+    }
     inPeak.store (juce::Decibels::gainToDecibels (ip, -100.0f)); outPeak.store (juce::Decibels::gainToDecibels (op, -100.0f));
 }
 

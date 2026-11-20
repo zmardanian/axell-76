@@ -561,7 +561,10 @@ void VuMeter::setGr (float db)
             if (v <= vuDb[k + 1]) { target = vuPos[k] + (vuPos[k + 1] - vuPos[k]) * (v - vuDb[k]) / (vuDb[k + 1] - vuDb[k]); break; }
         if (v < -20.0f) target = 0.0f;
     }
-    vel = 0.55f * vel + 0.30f * (target - shown);
+    if (mode == 0)
+        vel = 0.55f * vel + 0.30f * (target - shown);
+    else    // 3.2.2: the processor models the VU movement itself; here only the 40 Hz steps are smoothed (~25 ms)
+        vel = 0.6f * (target - shown);
     shown = jlimit (-0.03f, 1.03f, shown + vel);
     // the backlight breathes: a slow random drift of a couple of percent, now and then a tiny dip
     if ((++ticks % 12u) == 0u)

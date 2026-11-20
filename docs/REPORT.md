@@ -293,3 +293,20 @@ The one cost - music a little less UADx-like - is the balance the project asked 
 decides. Released with the user's approval. Sessions: model marks 2 (2.0), 3 (3.0/3.1), 4 (3.2); 2.0 sessions render
 bit-identically to the 2.0.0 bundle and 3.x sessions to the 3.1.0 bundle (8 settings each). Presets re-checked on the
 3.2 model: 2 of 40 OUTPUT values re-matched (> 0.25 dB). Tests: DSP 42, plugin 25.
+
+## 12. Version 3.2.2: a real VU (2026-11-20)
+The artist on the website's loop: the needle swept the whole scale, brutally and fast. Cause: in +4 / +8 the needle
+was fed the RMS of the last audio block alone (512 samples, ~10 ms) and its own spring (tuned for the GR mode) acted
+on that dB value - between two drum hits the block level falls 40 dB, so the needle fell to the left stop and came
+back on every hit. A VU movement integrates the rectified signal before the scale, so short gaps barely move it.
+- **Now:** the processor runs a VU movement at audio rate - the full-wave rectified output (louder channel) through a
+  second-order system, damping 0.81, 2.14 Hz: 99 % of a step in 300 ms, 1.3 % overshoot (IEC 60268-17), read as a
+  sine's RMS (x 1.1107, so 0 VU still = -18 dBFS RMS at +4). The editor only smooths its 40 Hz steps. GR mode as before.
+- **Tests (plugin suite, 3 new):** a -18 dBFS RMS sine reads -18.0 dB; 99 % rise in 300 ms +- 10 %; on a beat (hits
+  10 dB over a bed) the VU swings well under the block RMS.
+- **Sound:** untouched - 186 renders (52 presets + 41 random settings, a vocal and a mix) byte-identical to the 3.2.1
+  release.
+- **The website loop** is filmed again at the editor's real 40 Hz pace (GuiSnapshot ticked it every 10.7 ms block:
+  2.3x too fast) on a full boom bap mix: input -2 dB, 4:1, attack and release 3 - about 6 dB of peak gain reduction,
+  the VU between -3 and 0 with the beat.
+
