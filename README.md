@@ -224,6 +224,10 @@ scripts/build-portable.sh && scripts/make-release.sh     # the portable Linux re
 Hardware data: Martinez Ramirez, Benetos & Reiss (2020), CC BY 4.0. Music stems: MUSDB18 (research use, not
 redistributed). Framework: JUCE. Typefaces: Great Vibes, Cormorant Garamond and Jost (SIL Open Font License).
 
+From the November 2026 releases on, `SHA256SUMS.txt` is signed with the suite's release key: `minisign -Vm SHA256SUMS.txt -P RWQJLVJSETsP7RRz1rdiugX9w09wtGCtwEc5hHU8k9S+crL/ekfTkQKG`, then `sha256sum -c --ignore-missing SHA256SUMS.txt`. How releases are built and signed: [code signing policy](https://www.axellsdojo.com/code-signing/).
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/vst-compatible-dark.svg"><img src="docs/vst-compatible.svg" alt="VST Compatible" width="72"></picture>
+
 *1176, 1176LN, UADx and Universal Audio are trademarks of Universal Audio, Inc. Axell 76 is an independent work, not
 affiliated with or endorsed by Universal Audio; the names describe what was measured and compared. VST is a registered trademark of Steinberg Media Technologies GmbH.*
 
