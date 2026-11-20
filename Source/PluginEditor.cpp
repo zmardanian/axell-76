@@ -1,4 +1,5 @@
 #include "PluginEditor.h"
+#include <axell/gui/ScreenReader.h>
 #include <axell/gui/LookAndFeel.h>
 #include <random>
 #include "A76Fonts.h"
@@ -1219,6 +1220,7 @@ A76Editor::A76Editor (A76Processor& p) : AudioProcessorEditor (&p), proc (p), fa
     getConstrainer()->setFixedAspectRatio ((double) vintage::kTotalW / vintage::kTotalH);
     setSize (vintage::kTotalW * 7 / 10, vintage::kTotalH * 7 / 10);   // compact: 750 x 340 by default
     startTimerHz (40);
+    axell::nameControlsForScreenReaders (*this);   // Narrator / VoiceOver read every control by name
 }
 
 A76Editor::~A76Editor() { setLookAndFeel (nullptr); }

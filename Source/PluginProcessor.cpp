@@ -135,6 +135,7 @@ void A76Processor::getStateInformation (juce::MemoryBlock& destData)
     auto st = apvts.copyState();
     st.setProperty ("stateVersion", 3, nullptr);
     st.setProperty ("model", modelGen.load(), nullptr);
+    st.setProperty ("program", currentProgram.load(), nullptr);   // the factory preset last chosen, so hosts see the same Program after a reload
     if (auto xml = st.createXml()) copyXmlToBinary (*xml, destData);
 }
 
@@ -154,6 +155,10 @@ void A76Processor::setStateInformation (const void* data, int sizeInBytes)
             }
             // a state from before 3.0 has no model mark: it keeps the 2.0 model, so old sessions sound as they did
             modelGen.store (tree.hasProperty ("model") ? juce::jlimit (2, 4, (int) tree.getProperty ("model")) : 2);
+            // only the index: the parameters come from the state itself, the preset is not applied again
+            if (tree.hasProperty ("program"))
+                currentProgram.store (juce::jlimit (0, juce::jmax (0, getNumPrograms() - 1), (int) tree.getProperty ("program")));
+            tree.removeProperty ("program", nullptr);
             apvts.replaceState (tree);
             // replaceState only moves parameters whose stored value changed; a host may have left a switch at an
             // in-between value (0.37 reads as 'off' but is reported as 0.37), so every parameter gets its saved value

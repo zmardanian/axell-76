@@ -136,16 +136,16 @@ checked on material it was not tuned on. [What every preset measurably does &rar
 
 **Windows 10 / 11 (64-bit):** install the whole Axell Signature Suite with
 [`AxellSignatureSuite-…-windows-x64-setup.exe`](https://github.com/zmardanian/axell-signature-dojo/releases/latest)
-(Axell 76 is one of its components), or download **`Axell76-3.2.0-windows-x64.tar.gz`** from [Releases](../../releases)
+(Axell 76 is one of its components), or download **`Axell76-3.2.1-windows-x64.tar.gz`** from [Releases](../../releases)
 and copy the `Axell 76.vst3` folder inside it into `C:\Program Files\Common Files\VST3`. Every VST3 host loads it
 (REAPER, Ableton Live, FL Studio, Cubase, Studio One, Bitwig...). The Windows build is made and tested by GitHub
 Actions and renders the same as the Linux build (largest difference -138.5 dBFS); it is not code-signed yet.
 
-**Linux:** download **`Axell76-3.2.0-linux-x86_64.tar.gz`** from [Releases](../../releases), then:
+**Linux:** download **`Axell76-3.2.1-linux-x86_64.tar.gz`** from [Releases](../../releases), then:
 
 ```bash
-tar xzf Axell76-3.2.0-linux-x86_64.tar.gz
-cd Axell76-3.2.0-linux-x86_64
+tar xzf Axell76-3.2.1-linux-x86_64.tar.gz
+cd Axell76-3.2.1-linux-x86_64
 ./install.sh            # VST3 -> ~/.vst3, LV2 -> ~/.lv2, the standalone app into your menu - no root needed
 ```
 
@@ -185,6 +185,7 @@ was tried and rejected, is in [docs/REPORT.md](docs/REPORT.md).
 
 | Version | |
 |---|---|
+| **3.2.1** | Your DAW's preset menu shows the right preset after a project is reopened (the chosen preset is saved with the project and read back without re-applying it); every control named for screen readers. Sound byte-identical to 3.2.0 (186 renders) |
 | **3.2** | Fitted to a real 1176LN as well as the UADx: 0.466 &rarr; 0.435 dB from the hardware on unseen notes, waveform match 0.66 dB better, the UADx's harmonics matched more closely; one trade-off - 0.015 dB less UADx-like on music. Studio-ready README. Earlier sessions keep their sound |
 | **3.1** | 52 presets (40 new, 10 tuned on the artist's voice, vocal-keyed pocket ducking), grouped menu; parameter values shown correctly in every host |
 | **3.0** | FET odd harmonics toward the UADx (75 %), a delicate capped thump, the walnut cabinet, HiDPI textures |

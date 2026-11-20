@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(Axell76 VERSION 3.2.0)
+project(Axell76 VERSION 3.2.1)
 add_compile_definitions(AXELL_VERSION_STRING="${PROJECT_VERSION}")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
